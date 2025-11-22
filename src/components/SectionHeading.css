@@ -1,0 +1,18 @@
+.section-heading {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  position: relative;
+}
+
+.section-heading::after {
+  content: "";
+  width: 80px;
+  height: 3px;
+  background: #007bff;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 3px;
+}

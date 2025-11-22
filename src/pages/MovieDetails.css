@@ -1,0 +1,45 @@
+.movie-details-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #f9f9f9;
+}
+
+.movie-detail-container {
+  display: flex;
+  gap: 30px;
+  max-width: 900px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.movie-detail-img {
+  width: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.movie-info h1 {
+  margin-bottom: 10px;
+  color: black;
+}
+
+.movie-info p {
+  margin-bottom: 10px;
+}
+
+.movie-info yt-genre p{
+  font-size: 5px;
+}
+
+.book-btn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}

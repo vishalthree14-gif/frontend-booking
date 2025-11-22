@@ -1,0 +1,45 @@
+.movie-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+}
+
+.movie-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.movie-details {
+  padding: 12px 15px;
+}
+
+.movie-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.movie-genre {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.movie-lang {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.movie-status {
+  color: #007bff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 6px;
+}

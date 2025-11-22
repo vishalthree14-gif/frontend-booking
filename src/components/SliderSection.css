@@ -1,0 +1,111 @@
+/* --- Wrapper --- */
+.slider-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Slide --- */
+.slide {
+  position: relative;
+  width: 100%;
+  height: 50vh; /* 👈 Smaller height for laptop balance */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Image --- */
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 2s ease;
+  filter: brightness(85%);
+}
+
+.slick-active .slide-image {
+  transform: scale(1.02); /* Subtle zoom */
+}
+
+/* --- Overlay --- */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
+  z-index: 1;
+}
+
+/* --- Info --- */
+.slide-info {
+  position: absolute;
+  z-index: 2;
+  left: 80px;
+  bottom: 80px;
+  color: #fff;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slide-info h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.slide-info .rating {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* --- Dots --- */
+.slick-dots li button:before {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: white;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .slide {
+    height: 45vh;
+  }
+
+  .slide-info {
+    bottom: 60px;
+    left: 50px;
+  }
+
+  .slide-info h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide {
+    height: 40vh;
+  }
+
+  .slide-info {
+    left: 30px;
+    bottom: 40px;
+  }
+
+  .slide-info h2 {
+    font-size: 1.3rem;
+  }
+
+  .slide-info .rating {
+    font-size: 0.9rem;
+  }
+}

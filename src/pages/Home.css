@@ -1,0 +1,47 @@
+.home-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.slider-wrapper {
+  overflow: visible; 
+}
+
+
+.home-content {
+  padding: 50px 80px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.home-content h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.home-content p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+
+
+.home-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.content-wrapper {
+  padding: 40px 60px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
