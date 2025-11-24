@@ -1,49 +1,136 @@
+/* ========================================
+   MALL CARD - Modern Cinema Hall Display
+   ======================================== */
+
 .mall-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all var(--transition-normal);
   cursor: pointer;
+  position: relative;
+  animation: slideUp 0.5s ease;
+}
+
+.mall-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 168, 225, 0.1) 0%, rgba(229, 9, 20, 0.1) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .mall-card:hover {
-  transform: scale(1.03);
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+}
+
+.mall-card:hover::before {
+  opacity: 1;
 }
 
 .mall-image {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
+  transition: transform var(--transition-slow);
+  filter: brightness(0.95);
+}
+
+.mall-card:hover .mall-image {
+  transform: scale(1.08);
+  filter: brightness(1);
 }
 
 .mall-details {
-  padding: 10px 14px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  position: relative;
+  z-index: 2;
+  background: var(--surface);
 }
 
 .mall-details h3 {
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-  color: black;
+  font-size: 1.15rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.3;
+  transition: color var(--transition-fast);
+}
+
+.mall-card:hover .mall-details h3 {
+  color: var(--accent-blue);
 }
 
 .mall-details p {
-  color: #555;
+  color: var(--text-secondary);
   font-size: 0.9rem;
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.5;
 }
 
 .mall-rating {
-  color: #ffb400;
-  font-weight: 600;
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--spacing-xs);
+  padding: 4px 10px;
+  background: linear-gradient(135deg, rgba(245, 197, 24, 0.15) 0%, rgba(245, 197, 24, 0.05) 100%);
+  border-radius: var(--radius-sm);
 }
 
-
-/* ✅ Add this */
-.movie-details h3 {
-  color: black;              /* text color for contrast */
-  padding: 5px 10px;         /* a little padding looks better */
-  border-radius: 5px;
-  display: inline-block;     /* so background fits just the text */
-  margin-bottom: 6px;
+.mall-rating::before {
+  content: '★';
   font-size: 1.1rem;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mall-image {
+    height: 180px;
+  }
+
+  .mall-details {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .mall-details h3 {
+    font-size: 1rem;
+  }
+
+  .mall-card:hover {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .mall-image {
+    height: 160px;
+  }
+
+  .mall-card:hover {
+    transform: translateY(-4px);
+  }
 }

@@ -1,53 +1,80 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Header.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import BookingModal from "./BookingModal";
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   const path = location.pathname;
 
-  // ✅ Hide buttons on "/", "/login", and "/signup"
-  const hideAuthButtons =
-    path === "/" || path === "/login" || path === "/signup";
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  const handleLogoClick = () => {
+    if (user) {
+      navigate(user.role === "admin" ? "/admin/malls" : "/home");
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
-    <header className="header">
-      <div className="header-left">
-        <h1 className="logo" onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
-          Mall Booking
-        </h1>
-      </div>
+    <>
+      <header className="header">
+        <div className="header-left">
+          <h1 className="logo" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+            Mall Booking
+          </h1>
+        </div>
 
-      {/* ✅ Only show buttons if not hidden */}
-      {!hideAuthButtons && (
         <div className="header-right">
-          <button className="btn login-btn" onClick={() => navigate("/login")}>
-            Login
-          </button>
-          <button className="btn signup-btn" onClick={() => navigate("/signup")}>
-            Sign Up
-          </button>
+          {user ? (
+            // Show user info and logout when authenticated
+            <>
+              <span className="user-welcome">Welcome, {user.name}</span>
+              {user.role !== "admin" && (
+                <button
+                  className="btn bookings-btn"
+                  onClick={() => setIsBookingModalOpen(true)}
+                >
+                  My Bookings
+                </button>
+              )}
+              <button className="btn logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            // Show Login/Signup when not authenticated
+            <>
+              {path !== "/login" && (
+                <button className="btn login-btn" onClick={() => navigate("/login")}>
+                  Login
+                </button>
+              )}
+              {path !== "/signup" && (
+                <button className="btn signup-btn" onClick={() => navigate("/signup")}>
+                  Sign Up
+                </button>
+              )}
+            </>
+          )}
         </div>
-      )}
+      </header>
 
-      {/* ✅ Conditional button swapping (only visible on login/signup) */}
-      {path === "/login" && (
-        <div className="header-right">
-          <button className="btn signup-btn" onClick={() => navigate("/signup")}>
-            Sign Up
-          </button>
-        </div>
-      )}
-      {path === "/signup" && (
-        <div className="header-right">
-          <button className="btn login-btn" onClick={() => navigate("/login")}>
-            Login
-          </button>
-        </div>
-      )}
-    </header>
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
+    </>
   );
 };
 

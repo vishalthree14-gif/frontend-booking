@@ -16,16 +16,30 @@ import ManageHalls from "./pages/admin/ManageHalls";
 import ManageShows from "./pages/admin/ManageShows";
 import SelectMall from "./pages/SelectMall";
 import ShowTimes from "./pages/ShowTimes";
+import SeatSelection from "./pages/SeatSelection";
+import BookingConfirmation from "./pages/BookingConfirmation";
 
 
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 
 import "./App.css";
 
+// Protected Route Component for authenticated users
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <Router>
       <div className="app">
@@ -34,23 +48,34 @@ function App() {
         <main className="main-content">
           <Routes>
 
-            <Route path="/" element={<Home />} />
+            {/* Landing page - Login */}
+            <Route path="/" element={
+              user ? (
+                user.role === "admin" ? <Navigate to="/admin/malls" replace /> : <Navigate to="/home" replace />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            } />
 
-            <Route path="/movie/:id" element={<MovieDetails />} />
+            {/* Auth routes - redirect to home if already logged in */}
+            <Route path="/login" element={user ? <Navigate to={user.role === "admin" ? "/admin/malls" : "/home"} replace /> : <Login />} />
+            <Route path="/signup" element={user ? <Navigate to="/home" replace /> : <Signup />} />
 
-            <Route path="/booking/:id" element={<Booking />} />
+            {/* User routes - protected */}
+            <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/movie/:id" element={<ProtectedRoute><MovieDetails /></ProtectedRoute>} />
 
-            <Route path="/home" element={<Navigate to="/" />} />
+            <Route path="/booking/:id" element={<ProtectedRoute><Booking /></ProtectedRoute>} />
+
+            <Route path="/mall/:id" element={<ProtectedRoute><MallDetails /></ProtectedRoute>} />
+
+            <Route path="/booking/:movieId/select" element={<ProtectedRoute><SelectMall /></ProtectedRoute>} />
+            <Route path="/booking/:movieId/mall/:mallId/shows" element={<ProtectedRoute><ShowTimes /></ProtectedRoute>} />
+            <Route path="/booking/show/:showId/seats" element={<ProtectedRoute><SeatSelection /></ProtectedRoute>} />
+            <Route path="/booking/confirm" element={<ProtectedRoute><BookingConfirmation /></ProtectedRoute>} />
 
             <Route path="*" element={<h2>404 - Page Not Found</h2>} />
-
-            <Route path="/mall/:id" element={<MallDetails />} />
-
-            <Route path="/booking/:movieId/select" element={<SelectMall />} />
-            <Route path="/booking/:movieId/mall/:mallId/shows" element={<ShowTimes />} />
 
 
             {/* ------- ADMIN ONLY ROUTES ------- */}

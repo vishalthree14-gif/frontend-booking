@@ -5,6 +5,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../config/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:5001/api/users/login", {
+      const response = await fetch(API_ENDPOINTS.USERS.LOGIN, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -67,7 +68,7 @@ const Login = () => {
     try {
       const idToken = credentialResponse.credential;
 
-      const res = await fetch("http://localhost:5001/api/users/google-login", {
+      const res = await fetch(API_ENDPOINTS.USERS.GOOGLE_LOGIN, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idToken }),

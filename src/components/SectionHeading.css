@@ -1,18 +1,119 @@
+/* ========================================
+   SECTION HEADING - Modern Elegant Style
+   ======================================== */
+
 .section-heading {
   text-align: center;
-  margin: 40px 0 20px;
-  font-size: 1.8rem;
+  margin: var(--spacing-2xl) 0 var(--spacing-xl);
+  font-size: 2rem;
   font-weight: 700;
-  color: #222;
+  color: var(--text-primary);
   position: relative;
+  animation: fadeIn 0.6s ease;
+  letter-spacing: -0.5px;
+}
+
+.section-heading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent 100%);
+  z-index: -1;
 }
 
 .section-heading::after {
   content: "";
-  width: 80px;
-  height: 3px;
-  background: #007bff;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-blue) 100%);
   display: block;
-  margin: 10px auto 0;
-  border-radius: 3px;
+  margin: var(--spacing-md) auto 0;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
+  animation: slideIn 0.8s ease;
+}
+
+/* Gradient text effect for special headings */
+.section-heading.gradient-text {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Alternative style with side decorations */
+.section-heading.decorated {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.section-heading.decorated::before,
+.section-heading.decorated::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-sm);
+  position: static;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100px;
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 1.6rem;
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+  }
+
+  .section-heading::after {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading {
+    font-size: 1.4rem;
+    margin: var(--spacing-lg) 0 var(--spacing-md);
+  }
+
+  .section-heading::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .section-heading.decorated::before,
+  .section-heading.decorated::after {
+    width: 40px;
+  }
 }

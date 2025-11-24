@@ -1,48 +1,182 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  width: 100vw;              /* 👈 Force full viewport width */
-
-  border-bottom: 1px solid #e0e0e0;
-  padding: 12px 24px;
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 48px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-.header-left .logo {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   cursor: pointer;
+  margin: 0;
+  letter-spacing: -0.5px;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo::before {
+  content: "🎬 ";
+  -webkit-text-fill-color: var(--primary-color);
 }
 
 .header-right {
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 10px 24px;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   font-size: 0.95rem;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .login-btn {
-  background-color: transparent;
-  color: #333;
-  border: 1px solid #ccc;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border);
+}
+
+.login-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.15);
 }
 
 .signup-btn {
-  background-color: #007bff;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
-  border: 1px solid #007bff;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.25);
 }
 
-.btn:hover {
-  opacity: 0.9;
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.35);
+}
+
+.user-welcome {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.08) 0%, rgba(229, 9, 20, 0.04) 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(229, 9, 20, 0.15);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  color: white;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(178, 7, 16, 0.25);
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(178, 7, 16, 0.4);
+}
+
+.bookings-btn {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  font-weight: 600;
+  transition: all var(--transition-normal);
+}
+
+.bookings-btn:hover {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 20px;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .header-right {
+    gap: 8px;
+  }
+
+  .user-welcome {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .logo::before {
+    content: "";
+  }
+
+  .bookings-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
 }
