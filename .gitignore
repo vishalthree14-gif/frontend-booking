@@ -27,3 +27,57 @@ dist-ssr
 package-lock.json
 .env.example
 
+# Node modules
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+out/
+
+# Local env files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Vite-specific
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+.tmp/
+*.cache
+
+# Testing
+coverage/
+*.lcov
+
+# Local environment overrides
+*.local
+
+# Optional: if using TypeScript
+*.tsbuildinfo
