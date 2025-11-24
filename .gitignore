@@ -1,52 +1,19 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-.env
-package-lock.json
-.env.example
-
-# Node modules
+# Dependencies
 node_modules/
-.pnp
-.pnp.js
 
 # Build output
 dist/
 build/
 out/
 
-# Local env files
+# Environment files
 .env
 .env.local
 .env.development
 .env.production
 .env.test
-
-# Vite-specific
-vite.config.ts.timestamp-*
-vite.config.js.timestamp-*
+.env.*.local
+.env.example
 
 # Logs
 npm-debug.log*
@@ -54,30 +21,31 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor directories and files
-.idea/
+# Editor settings
 .vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.idea/
 
 # OS files
 .DS_Store
 Thumbs.db
 
 # Cache
+*.cache
 .cache/
 .tmp/
-*.cache
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
 
 # Testing
 coverage/
 *.lcov
 
-# Local environment overrides
-*.local
-
-# Optional: if using TypeScript
+# TypeScript build files
 *.tsbuildinfo
+
+# Misc
+*.swp
+*.swo
+
+package-lock.json
+
