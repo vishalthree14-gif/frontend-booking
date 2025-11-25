@@ -10,8 +10,10 @@ const SelectMall = () => {
   const [malls, setMalls] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
   useEffect(() => {
-    fetch(`http://localhost:5002/api/malls/by-movie/${movieId}`)
+    fetch(`${baseURL}/api/malls/by-movie/${movieId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setMalls(data.malls);

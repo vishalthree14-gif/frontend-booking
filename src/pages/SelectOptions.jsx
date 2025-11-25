@@ -12,9 +12,11 @@ const SelectOptions = () => {
     const [showTimes, setShowTimes] = useState([]);
     const [selectedTime, setSelectedTime] = useState("");
     
+    const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
     
     useEffect(() => {
-        fetch("http://localhost:5002/api/malls")
+        fetch(`${baseURL}/api/malls`)
         .then((res) => res.json())
         .then((data)=>{
             if(data.success) setMalls(data.malls);
@@ -24,7 +26,7 @@ const SelectOptions = () => {
     useEffect(() => {
 
         if(selectedMall && date){
-            fetch(`http://localhost:5002/api/shows?movieId=${id}&mallId=${selectedMall}&date=${date}`)
+            fetch(`${baseURL}/api/shows?movieId=${id}&mallId=${selectedMall}&date=${date}`)
             .then((res)=> res.json())
             .then((data) => {
                 if(data.success) setShowTimes(data.shows);

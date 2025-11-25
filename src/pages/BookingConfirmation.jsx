@@ -8,6 +8,9 @@ const BookingConfirmation = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+  const baseURLPAY = import.meta.env.VITE_APP_PAYMENT_SERVICE_URL;
+
   const { showId, selectedSeats, totalPrice, show } = location.state || {};
 
   const [loading, setLoading] = useState(false);
@@ -50,7 +53,7 @@ const BookingConfirmation = () => {
 
     try {
       // Step 1: Create temporary booking to lock seats
-      const bookingResponse = await fetch("http://localhost:5002/api/bookings", {
+      const bookingResponse = await fetch(`${baseURL}/api/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -72,7 +75,7 @@ const BookingConfirmation = () => {
       const bookingId = bookingData.booking._id;
 
       // Step 2: Create Razorpay order via payment service
-      const orderResponse = await fetch("http://localhost:5003/api/payments/create-order", {
+      const orderResponse = await fetch(`${baseURLPAY}/api/payments/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -110,7 +113,7 @@ const BookingConfirmation = () => {
         handler: async function (response) {
           try {
             // Verify payment on backend
-            const verifyResponse = await fetch("http://localhost:5003/api/payments/verify", {
+            const verifyResponse = await fetch(`${baseURLPAY}/api/payments/verify`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({

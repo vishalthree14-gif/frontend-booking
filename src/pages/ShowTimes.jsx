@@ -6,11 +6,16 @@ const ShowTimes = () => {
   const { movieId, mallId } = useParams();
   const navigate = useNavigate();
 
+    const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
+
   const [halls, setHalls] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+
   useEffect(() => {
-    fetch(`http://localhost:5002/api/shows/by-mall-movie/${mallId}/${movieId}`)
+    fetch(`${baseURL}/api/shows/by-mall-movie/${mallId}/${movieId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setHalls(data.halls);

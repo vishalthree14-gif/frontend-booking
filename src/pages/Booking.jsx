@@ -6,13 +6,15 @@ import { useNavigate } from "react-router-dom";
 const Booking = () => {
 
   const navigate = useNavigate();
+  
+  const baseURL = import.meta.env.VITE_HOME_SERVICE_URL;
 
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
 
   useEffect(() => {
-    fetch(`http://localhost:5002/api/movies/${id}`)
+    fetch(`${baseURL}/api/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setMovie(data.movie);

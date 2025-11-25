@@ -63,7 +63,36 @@ const Login = () => {
 
 
 
-  // 🔹 Google Login
+  // // 🔹 Google Login
+  // const handleGoogleSuccess = async (credentialResponse) => {
+  //   try {
+  //     const idToken = credentialResponse.credential;
+
+  //     const res = await fetch(API_ENDPOINTS.USERS.GOOGLE_LOGIN, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ idToken }),
+  //     });
+
+  //     const data = await res.json();
+  //     console.log("✅ Google login success:", data);
+
+  //     if (res.ok) {
+  //       localStorage.setItem("accessToken", data.accessToken);
+  //       localStorage.setItem("refreshToken", data.refreshToken);
+  //       alert("Logged in with Google successfully!");
+  //       // Redirect if you want:
+  //       // window.location.href = "/";
+  //     } else {
+  //       alert(data.msg || data.error || "Google login failed");
+  //     }
+  //   } catch (err) {
+  //     console.error("❌ Google login error:", err);
+  //     alert("Google login failed. Try again.");
+  //   }
+  // };
+
+
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
       const idToken = credentialResponse.credential;
@@ -78,11 +107,24 @@ const Login = () => {
       console.log("✅ Google login success:", data);
 
       if (res.ok) {
+        // Save tokens
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
-        alert("Logged in with Google successfully!");
-        // Redirect if you want:
-        // window.location.href = "/";
+
+        // Store user (optional depending on your auth flow)
+        login(data.accessToken, data.user);
+        localStorage.setItem("role", data.user.role);
+
+        // Redirect to homepage
+        // navigate("/");
+
+        if (data.user.role === "admin") {
+          navigate("/admin/malls");
+        } else {
+          navigate("/");
+        }
+
+
       } else {
         alert(data.msg || data.error || "Google login failed");
       }
@@ -91,6 +133,8 @@ const Login = () => {
       alert("Google login failed. Try again.");
     }
   };
+
+
 
   const handleGoogleFailure = () => {
     alert("Google login failed. Please try again.");

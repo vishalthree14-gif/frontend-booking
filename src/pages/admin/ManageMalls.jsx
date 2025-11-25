@@ -22,11 +22,12 @@ const ManageMalls = () => {
 
         try{
             const res = await API.get("/api/admin/getMalls");
-            setMalls(res.data.malls);
+            setMalls(res.data.malls || []);
 
         }catch(error){
             console.log(error);
             alert("failed to fetch malls");
+            setMalls([]);
         }
     };
 

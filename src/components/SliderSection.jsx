@@ -7,8 +7,11 @@ import "./SliderSection.css";
 const SliderSection = () => {
   const [movies, setMovies] = useState([]);
 
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
+
   useEffect(() => {
-    fetch("http://localhost:5002/api/ratings/top-rated")
+    fetch(`${baseURL}/api/ratings/top-rated`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched slider data:", data);

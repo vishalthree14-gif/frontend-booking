@@ -14,11 +14,12 @@ const MallDetails = () => {
     const [rating, setRating] = useState("");
     const [comment, setComment] = useState("");
 
+    const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
 
     const getMallDetails = async () => {
 
         try{
-            const res = await fetch(`http://localhost:5002/api/malls/${id}`);
+            const res = await fetch(`${baseURL}/api/malls/${id}`);
             const data = await res.json();
             setMall(data.mall);
 
@@ -32,7 +33,7 @@ const MallDetails = () => {
     const getMallReviews = async () => {
 
         try{
-            const res = await fetch(`http://localhost:5002/api/ratings/mall/${id}/reviews`);
+            const res = await fetch(`${baseURL}/api/ratings/mall/${id}/reviews`);
             const data = await res.json();
 
             setReviews(data.reviews);
@@ -47,7 +48,7 @@ const MallDetails = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch(`http://localhost:5002/api/ratings/mall/${id}/rate`, {
+            const res = await fetch(`${baseURL}/api/ratings/mall/${id}/rate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -18,9 +18,12 @@ const SeatSelection = () => {
   const [lockTimer, setLockTimer] = useState(null);
   const lockTimerRef = useRef(null);
 
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
+
   // Fetch show and seat data
   useEffect(() => {
-    fetch(`http://localhost:5002/api/shows/${showId}/seats`)
+    fetch(`${baseURL}/api/shows/${showId}/seats`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -104,7 +107,7 @@ const SeatSelection = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5002/api/bookings/lock", {
+      const response = await fetch(`${baseURL}/api/bookings/lock`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -149,7 +152,7 @@ const SeatSelection = () => {
     if (!user || !user.id || seatNumbers.length === 0) return;
 
     try {
-      await fetch("http://localhost:5002/api/bookings/unlock", {
+      await fetch(`${baseURL}/api/bookings/unlock`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

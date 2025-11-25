@@ -10,8 +10,10 @@ import MallDetails from "./pages/MallDetails";
 
 
 import AdminRoute from "./components/AdminRoute";
+import AdminNav from "./components/AdminNav";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManageMalls from "./pages/admin/ManageMalls";
+import ManageMovies from "./pages/admin/ManageMovies";
 import ManageHalls from "./pages/admin/ManageHalls";
 import ManageShows from "./pages/admin/ManageShows";
 import SelectMall from "./pages/SelectMall";
@@ -92,7 +94,18 @@ function App() {
               path="/admin/malls"
               element={
                 <AdminRoute>
+                  <AdminNav />
                   <ManageMalls />
+                </AdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/movies"
+              element={
+                <AdminRoute>
+                  <AdminNav />
+                  <ManageMovies />
                 </AdminRoute>
               }
             />
@@ -101,6 +114,7 @@ function App() {
               path="/admin/malls/:id"
               element={
                 <AdminRoute>
+                  <AdminNav />
                   <ManageHalls />
                 </AdminRoute>
               }
@@ -110,6 +124,7 @@ function App() {
               path="/admin/halls/:hallId/shows"
               element={
                 <AdminRoute>
+                  <AdminNav />
                   <ManageShows />
                 </AdminRoute>
               }

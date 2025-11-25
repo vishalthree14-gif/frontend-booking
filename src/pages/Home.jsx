@@ -21,9 +21,11 @@ const Home = () => {
 
   const limit = 10;
 
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
   // 🎥 Fetch Featured Movies
   const fetchFeaturedMovies = (page) => {
-    fetch(`http://localhost:5002/api/movies/featured?page=${page}&limit=${limit}`)
+    fetch(`${baseURL}/api/movies/featured?page=${page}&limit=${limit}`)
       .then((res) => res.json())
       .then((data) => {
         setFeaturedMovies(data.movies || []);
@@ -34,7 +36,7 @@ const Home = () => {
 
   // 🎞️ Fetch Upcoming Movies
   const fetchUpcomingMovies = (page) => {
-    fetch(`http://localhost:5002/api/movies/upcoming?page=${page}&limit=${limit}`)
+    fetch(`${baseURL}/api/movies/upcoming?page=${page}&limit=${limit}`)
       .then((res) => res.json())
       .then((data) => {
         setUpcomingMovies(data.movies || []);
@@ -45,7 +47,7 @@ const Home = () => {
 
   // 🏬 Fetch Malls (no pagination)
   const fetchMalls = () => {
-    fetch("http://localhost:5002/api/malls?page=1&limit=5")
+    fetch(`${baseURL}/api/malls?page=1&limit=5`)
       .then((res) => res.json())
       .then((data) => setMalls(data.malls || []))
       .catch((err) => console.error("Mall fetch error:", err));
