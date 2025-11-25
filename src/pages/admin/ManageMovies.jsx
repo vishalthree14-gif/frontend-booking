@@ -20,7 +20,7 @@ const ManageMovies = () => {
   // Fetch all movies
   const fetchMovies = async () => {
     try {
-      const res = await API.get("/api/admin/getMovies");
+      const res = await API.get("/api/movies");
       setMovies(res.data.movies || []);
     } catch (error) {
       console.log(error);
@@ -48,7 +48,8 @@ const ManageMovies = () => {
     setLoading(true);
 
     try {
-      const res = await API.post("/api/admin/addMovie", formData);
+      const res = await API.post("/api/admin/movies", formData);
+
       alert("Movie added successfully!");
       setFormData({
         title: "",
@@ -75,7 +76,7 @@ const ManageMovies = () => {
     if (!window.confirm("Delete this movie?")) return;
 
     try {
-      await API.delete(`/api/admin/movie/${id}`);
+      await API.delete(`/api/admin/movies/${id}`);
       alert("Movie deleted!");
       setMovies(movies.filter((m) => m._id !== id));
     } catch (error) {

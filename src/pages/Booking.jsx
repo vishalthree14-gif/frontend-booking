@@ -7,7 +7,7 @@ const Booking = () => {
 
   const navigate = useNavigate();
   
-  const baseURL = import.meta.env.VITE_HOME_SERVICE_URL;
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
 
   const { id } = useParams();
   const [movie, setMovie] = useState(null);

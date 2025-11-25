@@ -9,8 +9,8 @@ const AdminNav = () => {
   const navItems = [
     { label: "Manage Malls", path: "/admin/malls" },
     { label: "Manage Movies", path: "/admin/movies" },
-    { label: "Manage Halls", path: "/admin/halls" },
-    { label: "Manage Shows", path: "/admin/shows" },
+    // { label: "Manage Halls", path: "/admin/halls" },
+    // { label: "Manage Shows", path: "/admin/shows" },
   ];
 
   return (

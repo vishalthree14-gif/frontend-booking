@@ -2,9 +2,9 @@
 // Centralized API base URLs from environment variables
 
 const API_CONFIG = {
-  USER_SERVICE: import.meta.env.VITE_APP_USER_SERVICE_URL || 'http://localhost:5001',
-  HOME_SERVICE: import.meta.env.VITE_APP_HOME_SERVICE_URL || 'http://localhost:5002',
-  PAYMENT_SERVICE: import.meta.env.VITE_APP_PAYMENT_SERVICE_URL || 'http://localhost:5003',
+  USER_SERVICE: import.meta.env.VITE_APP_USER_SERVICE_URL,
+  HOME_SERVICE: import.meta.env.VITE_APP_HOME_SERVICE_URL,
+  PAYMENT_SERVICE: import.meta.env.VITE_APP_PAYMENT_SERVICE_URL,
 };
 
 // API Endpoints

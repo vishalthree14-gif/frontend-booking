@@ -10,6 +10,9 @@ const BookingModal = ({ isOpen, onClose }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const baseURL = import.meta.env.VITE_APP_HOME_SERVICE_URL;
+
+  
   useEffect(() => {
     if (isOpen && user && user.id) {
       fetchBookings();
@@ -26,7 +29,7 @@ const BookingModal = ({ isOpen, onClose }) => {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:5002/api/bookings/user/${user.id}`);
+      const response = await fetch(`${baseURL}/api/bookings/user/${user.id}`);
       const data = await response.json();
 
       if (data.success) {

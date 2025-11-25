@@ -3,6 +3,9 @@ import "./Signup.css";
 
 const Signup = () => {
 
+  const baseURL = import.meta.env.VITE_APP_USER_SERVICE_URL;
+
+  
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState('');
   const [formData, setFormData] = useState({
@@ -41,7 +44,7 @@ const Signup = () => {
       bodyData.role = "admin";
     }
 
-    const response = await fetch(`{import.meta.env.REACT_APP_USER_SERVICE_URL}/api/users/register`, {
+    const response = await fetch(`${baseURL}/api/users/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify( bodyData  )
