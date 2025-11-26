@@ -17,23 +17,31 @@ const SelectOptions = () => {
     
     useEffect(() => {
         fetch(`${baseURL}/api/malls`)
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+        })
         .then((data)=>{
             if(data.success) setMalls(data.malls);
         })
+        .catch((err) => console.error("Error loading malls:", err));
     }, []);
 
     useEffect(() => {
 
         if(selectedMall && date){
             fetch(`${baseURL}/api/shows?movieId=${id}&mallId=${selectedMall}&date=${date}`)
-            .then((res)=> res.json())
+            .then((res)=> {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
             .then((data) => {
                 if(data.success) setShowTimes(data.shows);
-            });
+            })
+            .catch((err) => console.error("Error loading show times:", err));
         }
 
-    }, [selectedMall, date]);
+    }, [selectedMall, date, id, baseURL]);
 
     const goToSeatPage = () =>{
         navigate(`/booking/${id}/seats?mall=${selectedMall}&date=${date}&time=${selectedTime}`);

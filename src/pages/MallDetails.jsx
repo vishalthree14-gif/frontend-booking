@@ -20,6 +20,7 @@ const MallDetails = () => {
 
         try{
             const res = await fetch(`${baseURL}/api/malls/${id}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
             setMall(data.mall);
 
@@ -34,6 +35,7 @@ const MallDetails = () => {
 
         try{
             const res = await fetch(`${baseURL}/api/ratings/mall/${id}/reviews`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
 
             setReviews(data.reviews);
@@ -61,6 +63,7 @@ const MallDetails = () => {
             })
             });
 
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
 
             if (data.success) {
