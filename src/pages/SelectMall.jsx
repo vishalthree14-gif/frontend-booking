@@ -14,7 +14,10 @@ const SelectMall = () => {
 
   useEffect(() => {
     fetch(`${baseURL}/api/malls/by-movie/${movieId}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         if (data.success) setMalls(data.malls);
         setLoading(false);

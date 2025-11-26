@@ -26,7 +26,10 @@ const Home = () => {
   // 🎥 Fetch Featured Movies
   const fetchFeaturedMovies = (page) => {
     fetch(`${baseURL}/api/movies/featured?page=${page}&limit=${limit}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         setFeaturedMovies(data.movies || []);
         setTotalFeatured(data.total || 0);
@@ -37,7 +40,10 @@ const Home = () => {
   // 🎞️ Fetch Upcoming Movies
   const fetchUpcomingMovies = (page) => {
     fetch(`${baseURL}/api/movies/upcoming?page=${page}&limit=${limit}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         setUpcomingMovies(data.movies || []);
         setTotalUpcoming(data.total || 0);
@@ -48,7 +54,10 @@ const Home = () => {
   // 🏬 Fetch Malls (no pagination)
   const fetchMalls = () => {
     fetch(`${baseURL}/api/malls?page=1&limit=5`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => setMalls(data.malls || []))
       .catch((err) => console.error("Mall fetch error:", err));
   };

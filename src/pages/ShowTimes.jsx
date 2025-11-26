@@ -16,7 +16,10 @@ const ShowTimes = () => {
 
   useEffect(() => {
     fetch(`${baseURL}/api/shows/by-mall-movie/${mallId}/${movieId}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         if (data.success) setHalls(data.halls);
         setLoading(false);
